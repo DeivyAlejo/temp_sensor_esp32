@@ -41,7 +41,7 @@ float Temperature;
 float Humidity; 
 
 void goToDeepSleep(){
-  esp_sleep_enable_timer_wakeup(DEEP_SLEEP_TIME * 10 * 1000000);
+  esp_sleep_enable_timer_wakeup(DEEP_SLEEP_TIME * 60 * 1000000);
   esp_deep_sleep_start();
 }
 
@@ -139,6 +139,7 @@ void setup() {
   serializeJson(doc, output);
   Serial.println(output);
   client.publish("home/sensor", output);
+  delay(100);
 
   goToDeepSleep();
 }
