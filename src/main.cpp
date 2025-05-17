@@ -23,6 +23,8 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define SDA 8
 #define SCL 9
 
+#define DEEP_SLEEP_TIME 2
+
 #define DHTPIN 0
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
@@ -38,10 +40,14 @@ PubSubClient client(espClient);
 float Temperature;
 float Humidity; 
 
-void connect_to_wifi(){
-  Serial.println("Conecting to ");
-  Serial.println("Laska wifi");
+void goToDeepSleep(){
+  esp_sleep_enable_timer_wakeup(DEEP_SLEEP_TIME * 10 * 1000000);
+  esp_deep_sleep_start();
+}
 
+void connect_to_wifi(){
+  Serial.println("Conecting to WiFi");
+  WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
 
   // check wi-fi is connected to wi-fi network
@@ -86,46 +92,23 @@ void setup() {
   }
 
   display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(0,0);
-  display.println(WiFi.localIP());
-  display.display();
-  delay(5000);
 
   client.setServer(mqtt_server, 1883);
 
+
+
+  // goToDeepSleep();
 }
 
 void loop() {
-
-  if (!client.connected()) {
+    if (!client.connected()) {
     reconnect();
   }
 
-  // Reading temperature from sensor
   Temperature = dht.readTemperature();
   Humidity = dht.readHumidity();
-  
 
-  // Display Text whit bold oblique
-  // display.clearDisplay();
-  // display.setTextSize(1);
-  // display.setFont(&FreeSansBoldOblique12pt7b);
-  // display.setTextColor(WHITE);
-  // display.setCursor(0,26);
-  // display.print("T: ");
-  // display.print(Temperature,1);
-  // display.print((char)247);
-  // display.println("C");
-  // display.print("H: ");
-  // display.print(Humidity,1);
-  // display.println("%");
-  // display.display();
-  
-
-
-  // Display text with a different text format
+    // Display text with a different text format
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
@@ -163,9 +146,5 @@ void loop() {
   serializeJson(doc, output);
   Serial.println(output);
   client.publish("home/sensor", output);
-  // client.publish(Temperature);
-
-
-  // Delay between measurements.
   delay(5000);
 }
