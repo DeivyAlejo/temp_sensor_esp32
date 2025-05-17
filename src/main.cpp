@@ -95,13 +95,7 @@ void setup() {
 
   client.setServer(mqtt_server, 1883);
 
-
-
-  // goToDeepSleep();
-}
-
-void loop() {
-    if (!client.connected()) {
+  if (!client.connected()) {
     reconnect();
   }
 
@@ -137,7 +131,6 @@ void loop() {
   Serial.print(Humidity);
   Serial.println("%");
 
-  // Serial.println(WiFi.localIP());
   StaticJsonDocument<80> doc;
   char output[80];
   doc["t"] = Temperature;
@@ -146,5 +139,11 @@ void loop() {
   serializeJson(doc, output);
   Serial.println(output);
   client.publish("home/sensor", output);
-  delay(5000);
+
+  goToDeepSleep();
+}
+
+void loop() {
+    
+  // delay(5000);
 }
