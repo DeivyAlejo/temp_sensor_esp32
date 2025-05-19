@@ -71,7 +71,7 @@ void reconnect() {
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
-      delay(5000);
+      // delay(5000);
     }
   }
 }
