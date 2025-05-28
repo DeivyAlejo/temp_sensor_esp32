@@ -1,12 +1,34 @@
-# temp_sensor_esp32
-Reading temperature and humidity with an ESP32 and sending the data using MQTT to Home Assistant
+# ESP32 Temperature & Humidity Logger with OLED Display and MQTT
 
-This is a prof of concept code. The idea is to start improving the code and add more functionality
+This project logs temperature and humidity readings using a **DHT11 sensor**, displays the values on an **SSD1306 OLED screen**, and publishes the data to an **MQTT broker** over Wi-Fi using an **ESP32**. After sending the data, the ESP32 enters **deep sleep** to save power, making it ideal for low-energy IoT applications.
 
-To do list
-- [ ] Improve the code for Wi-Fi connection. Continue if it is not connected to Wi-Fi.
-- [ ] Show an icon on the display indicating whether it is connected to Wi-Fi or not
-- [ ] Improve the code for connecting to the MQTT broker. Continue if it is not connected to the MQTT broker.
-- [ ] Show an icon on the display indicating whether it is connected to the MQTT broker.
-- [ ] Change the time interval at which the client sends data to the MQTT broker.
-- [ ] ...
+---
+
+## 🛠 Features
+
+- 📡 Reads temperature and humidity from a DHT11 sensor.
+- 🖥 Displays real-time values on a 128x64 I2C OLED display.
+- ☁ Sends sensor data in JSON format to an MQTT broker.
+- 🔋 Enters deep sleep after publishing to save power.
+
+---
+
+## 🔧 Hardware Requirements
+
+- ESP32 board
+- DHT11 sensor
+- SSD1306 OLED display (128x64, I2C)
+- Jumper wires & breadboard
+
+---
+
+## 🧩 Software Requirements
+
+- Arduino IDE with ESP32 board support
+- Required libraries:
+  - `Adafruit_Sensor`
+  - `DHT`
+  - `Adafruit_GFX`
+  - `Adafruit_SSD1306`
+  - `PubSubClient`
+  - `ArduinoJson`
