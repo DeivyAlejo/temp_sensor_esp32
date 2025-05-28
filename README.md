@@ -32,3 +32,22 @@ This project logs temperature and humidity readings using a **DHT11 sensor**, di
   - `Adafruit_SSD1306`
   - `PubSubClient`
   - `ArduinoJson`
+
+ ---
+ 
+## 🧠 Skills Practiced
+
+This project helps reinforce and practice the following embedded systems and IoT skills:
+
+- ⚙ **Embedded C++** programming using the Arduino framework.
+- 🔌 **Interfacing with digital sensors** (DHT11 for temperature and humidity).
+- 📺 **Using I2C communication** to control peripherals (SSD1306 OLED display).
+- 🖥 **Displaying dynamic data** using the `Adafruit_GFX` graphics library.
+- 🌐 **Establishing Wi-Fi connections** using the ESP32 WiFi module.
+- 📤 **Publishing data via MQTT** using the `PubSubClient` library.
+- 📦 **JSON serialization** with `ArduinoJson` for structured data transfer.
+- 💾 **Modular coding** with external credential files (`passwords.h`).
+- 🔋 **Implementing deep sleep** for power-efficient IoT cycles.
+- 🧪 **Serial debugging** and monitoring with `Serial.println()` for development and troubleshooting.
+
+---
